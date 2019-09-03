@@ -26,9 +26,8 @@
 #
 
 SHELL = /bin/bash -e -o pipefail
-IPHONE32 = -scheme 'BlocksKit iOS Legacy' -sdk iphonesimulator -destination 'name=iPhone Retina (4-inch)'
-IPHONE64 = -scheme 'BlocksKit iOS Legacy' -sdk iphonesimulator -destination 'name=iPhone Retina (4-inch 64-bit)'
-MACOSX = -scheme 'BlocksKit Mac' -sdk macosx
+IOS = -scheme 'BlocksKit (iOS)' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone Xʀ,OS=12.4'
+MACOSX = -scheme 'BlocksKit (Mac)' -sdk macosx
 XCODEBUILD = xcodebuild -project BlocksKit.xcodeproj
 
 default: clean ios macosx
@@ -37,18 +36,15 @@ clean:
 	$(XCODEBUILD) clean
 
 ios:
-	$(XCODEBUILD) -scheme 'BlocksKit iOS Legacy' build
+	$(XCODEBUILD) -scheme 'BlocksKit (iOS)' build
 
 macosx:
-	$(XCODEBUILD) -scheme 'BlocksKit Mac' build
+	$(XCODEBUILD) -scheme 'BlocksKit (Mac)' build
 
-test: test-iphone32 test-iphone64 test-macosx
+test: test-ios
 
-test-iphone32:
-	$(XCODEBUILD) $(IPHONE32) test | xcpretty -c
-
-test-iphone64:
-	$(XCODEBUILD) $(IPHONE64) test | xcpretty -c
+test-ios:
+	$(XCODEBUILD) $(IOS) test | xcpretty -c
 
 test-macosx:
 	$(XCODEBUILD) $(MACOSX) test | xcpretty -c
