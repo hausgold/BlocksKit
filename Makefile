@@ -26,7 +26,7 @@
 #
 
 SHELL = /bin/bash -e -o pipefail
-IOS = -scheme 'BlocksKit (iOS)' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone Xʀ,OS=12.4'
+IOS = -scheme 'BlocksKit (iOS)' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=11.4'
 MACOSX = -scheme 'BlocksKit (Mac)' -sdk macosx
 XCODEBUILD = xcodebuild -project BlocksKit.xcodeproj
 
